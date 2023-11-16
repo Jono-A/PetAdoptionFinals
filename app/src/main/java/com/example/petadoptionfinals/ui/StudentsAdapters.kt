@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petadoptionfinals.R
 import com.example.petadoptionfinals.databinding.ItemStudentBinding
-import com.example.petadoptionfinals.model.StudentsModel
+import com.example.petadoptionfinals.model.Pets
 import com.example.petadoptionfinals.mvvm.ContactInfoActivity
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -17,7 +17,7 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-class StudentsAdapters(private val context : Context, var studentsList : ArrayList<StudentsModel>) :
+class StudentsAdapters(private val context : Context, var studentsList : ArrayList<Pets>) :
     RecyclerView.Adapter<StudentsAdapters.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +26,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
     }
 
     //+
-    fun updatedStudentList(updatedStudentList: ArrayList<StudentsModel>) {
+    fun updatedStudentList(updatedStudentList: ArrayList<Pets>) {
 
         studentsList = updatedStudentList
     }
@@ -49,7 +49,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
     ) :
         RecyclerView.ViewHolder(binding.root) {
         //item student
-        fun bind(contacts: StudentsModel, position: Int) {
+        fun bind(contacts: Pets, position: Int) {
             binding.ivProfile.setImageDrawable(context.getDrawable(R.drawable.studentavatar))
             binding.tvName.text = contacts.name
             binding.tvEmail.text = contacts.email

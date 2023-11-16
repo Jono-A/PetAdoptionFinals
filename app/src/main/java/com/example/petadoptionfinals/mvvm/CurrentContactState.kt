@@ -1,10 +1,10 @@
 package com.example.petadoptionfinals.mvvm
 
-import com.example.petadoptionfinals.model.StudentsModel
+import com.example.petadoptionfinals.model.Pets
 
 sealed class CurrentContactState {
 
-    data class Success(val studentsList: ArrayList <StudentsModel>?) : CurrentContactState()
+    data class Success(val studentsList: ArrayList <Pets>?) : CurrentContactState()
 
     object Error : CurrentContactState()
 

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.petadoptionfinals.R
 import com.example.petadoptionfinals.databinding.ActivityContactInfoBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
-import com.example.petadoptionfinals.model.StudentsModel
+import com.example.petadoptionfinals.model.Pets
 import com.example.petadoptionfinals.ui.EditInfoActivity
 import com.example.petadoptionfinals.ui.MainActivity
 import java.io.BufferedReader
@@ -40,7 +40,7 @@ class ContactInfoActivity : AppCompatActivity() {
         }
 
 
-        val students : StudentsModel? = intent.getParcelableExtra("contact")
+        val students : Pets? = intent.getParcelableExtra("contact")
 
         //activity_contact_info
         if (students != null) {

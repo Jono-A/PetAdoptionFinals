@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class StudentsModel(
+data class Pets(
 
     //var profilePic: String,
     var name : String?,

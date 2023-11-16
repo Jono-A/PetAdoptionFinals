@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petadoptionfinals.databinding.ActivityMainBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
-import com.example.petadoptionfinals.model.StudentsModel
+import com.example.petadoptionfinals.model.Pets
 import java.io.File
 import java.util.Scanner
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toolbarBinding: ToolbarTitleBinding
 
-    private val studentsList = ArrayList<StudentsModel>()
+    private val studentsList = ArrayList<Pets>()
     var doesFileExist : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             val line = sc.nextLine()
             val delim = ","
             array = line.split(delim)
-            studentsList.add(StudentsModel(array[0], array[1], array[2]))
+            studentsList.add(Pets(array[0], array[1], array[2]))
 
     }
 
