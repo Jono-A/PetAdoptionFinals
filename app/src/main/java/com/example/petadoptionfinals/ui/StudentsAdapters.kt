@@ -3,6 +3,7 @@ package com.example.petadoptionfinals.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +12,8 @@ import com.example.petadoptionfinals.R
 import com.example.petadoptionfinals.databinding.ItemStudentBinding
 import com.example.petadoptionfinals.model.Pets
 import com.example.petadoptionfinals.mvvm.ContactInfoActivity
+import com.google.firebase.Firebase
+import com.google.firebase.database.FirebaseDatabase
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.File
@@ -120,6 +123,8 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
                 val writer = BufferedWriter(FileWriter(tempFile))
                 var line: String?
                 var currLine = 0
+                val databaseReference = FirebaseDatabase.getInstance("Delete").toString()
+                val mTask = databaseReference.removeValue()
 
                 while (reader.readLine().also { line = it } != null) {
                     if (currLine == position){
@@ -142,6 +147,12 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
             }
 
             }
+        private fun String.removeValue() {
 
+        }
+        }
     }
-}
+
+
+
+
