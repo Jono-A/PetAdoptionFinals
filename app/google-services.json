@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "779661083121",
+    "project_id": "petadoptionfinals",
+    "storage_bucket": "petadoptionfinals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779661083121:android:53a194883607efa8e7c450",
+        "android_client_info": {
+          "package_name": "com.example.petadoptionfinals"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYvJFM8BjlYXQRuPyLvi-BFDzEv08yscI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
