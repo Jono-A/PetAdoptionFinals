@@ -2,9 +2,14 @@ package com.example.petadoptionfinals.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petadoptionfinals.databinding.ActivityAddContactBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
+import com.example.petadoptionfinals.model.Pets
+import com.google.firebase.Firebase
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.io.File
 import java.io.FileWriter
 
@@ -12,6 +17,7 @@ class AddContactActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddContactBinding
     private lateinit var toolbarBinding : ToolbarTitleBinding
+    private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +32,7 @@ class AddContactActivity : AppCompatActivity() {
                 writeData()
                 startActivity(Intent(this@AddContactActivity, MainActivity::class.java))
             }
+
         }
     }
 
@@ -54,11 +61,24 @@ class AddContactActivity : AppCompatActivity() {
         val email = binding.inEmail.text.toString()
         val phone = binding.inPhone.text.toString()
 
+        database = FirebaseDatabase.getInstance().getReference("Pets")
+        val Pets = Pets(name, email, phone)
+        database.child(name).setValue(Pets).addOnSuccessListener {
+            binding.inName.text.clear()
+            binding.inEmail.text.clear()
+            binding.inPhone.text.clear()
+            Toast.makeText(this, "Pet Added", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener{
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+        }
+
+
         if (!inputRequirements(name, email, phone)) {
             return false
         }
 
         return true
+
     }
 
     private fun writeData() {
