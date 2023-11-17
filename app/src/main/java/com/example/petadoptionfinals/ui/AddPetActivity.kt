@@ -2,29 +2,25 @@ package com.example.petadoptionfinals.ui
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract.DeletedContacts
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petadoptionfinals.databinding.ActivityAddContactBinding
+import com.example.petadoptionfinals.databinding.ActivityAddPetBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
 import com.example.petadoptionfinals.model.Pets
-import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import java.io.FileWriter
-import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AddContactActivity : AppCompatActivity() {
+class AddPetActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityAddContactBinding
+    private lateinit var binding : ActivityAddPetBinding
     private lateinit var toolbarBinding : ToolbarTitleBinding
     private lateinit var database : DatabaseReference
     private lateinit var ImageUri : Uri
@@ -32,7 +28,7 @@ class AddContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityAddContactBinding.inflate(layoutInflater)
+        binding = ActivityAddPetBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarTitleBinding.bind(binding.root)
 
         setContentView(binding.root)
@@ -40,7 +36,7 @@ class AddContactActivity : AppCompatActivity() {
         binding.addContact.setOnClickListener {
             if (addContact()) {
                 writeData()
-                startActivity(Intent(this@AddContactActivity, MainActivity::class.java))
+                startActivity(Intent(this@AddPetActivity, MainActivity::class.java))
             }
 
         }
@@ -109,12 +105,12 @@ class AddContactActivity : AppCompatActivity() {
         storageReference.putFile(ImageUri).
                 addOnSuccessListener {
                     binding.firebaseImage.setImageURI(null)
-                    Toast.makeText(this@AddContactActivity, "Successfully uploaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddPetActivity, "Successfully uploaded", Toast.LENGTH_SHORT).show()
                     if (progressDialog.isShowing) progressDialog.dismiss()
                 }.addOnFailureListener{
 
                     if (progressDialog.isShowing)progressDialog.dismiss()
-            Toast.makeText(this@AddContactActivity,"Failed",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddPetActivity,"Failed",Toast.LENGTH_SHORT).show()
         }
 
 
