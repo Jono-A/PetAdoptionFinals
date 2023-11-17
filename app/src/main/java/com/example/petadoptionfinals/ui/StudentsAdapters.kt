@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.DeletedContacts
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -66,12 +67,12 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
                 context.startActivity(intent)
             }
 
-          binding.llData.setOnLongClickListener{
+            binding.llData.setOnLongClickListener {
                 show_promptWhy()
             }
         }
 
-        private fun show_promptWhy() : Boolean {
+        private fun show_promptWhy(): Boolean {
             val builder: AlertDialog.Builder = AlertDialog.Builder(context)
             builder.setTitle("Choose an action")
             builder.setMessage("Choose...")
@@ -80,7 +81,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
                 Toast.makeText(context, "Edit here!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(context, EditInfoActivity::class.java)
-                intent.putExtra( "position", position)
+                intent.putExtra("position", position)
                 context.startActivity(intent)
             }
             builder.setNegativeButton("Delete") { dialog, which ->
@@ -93,14 +94,14 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
             return false
         }
 
-        private fun show_areYouSure() : Boolean {
+        private fun show_areYouSure(): Boolean {
             val builder: AlertDialog.Builder = AlertDialog.Builder(context)
             builder.setTitle("Confirm Delete")
             builder.setMessage("Are you sure you want to delete?")
             builder.setPositiveButton("Yes") { dialog, which ->
                 dialog.dismiss()
                 Toast.makeText(context, "Contact Deleted", Toast.LENGTH_SHORT).show()
-                deleteItem(position, context)
+                deleteData(position, context)
                 context.startActivity(Intent(context, MainActivity::class.java))
             }
             builder.setNegativeButton("No") { dialog, which ->
@@ -112,7 +113,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
             return false
         }
 
-        private fun deleteItem(position : Int, context: Context) {
+        private fun deleteData(position : Int, context: Context) {
 
             val path : File = context.filesDir
             val file : File = File(path, "datafile.txt")
