@@ -9,6 +9,7 @@ import com.example.petadoptionfinals.R
 import com.example.petadoptionfinals.databinding.ActivityContactInfoBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
 import com.example.petadoptionfinals.model.Pets
+import com.example.petadoptionfinals.ui.AddContactActivity
 import com.example.petadoptionfinals.ui.EditInfoActivity
 import com.example.petadoptionfinals.ui.MainActivity
 import com.google.firebase.database.FirebaseDatabase
@@ -105,7 +106,7 @@ class ContactInfoActivity : AppCompatActivity() {
         val path : File = this.filesDir
         val file : File = File(path, "datafile.txt")
         val tempFile : File = File.createTempFile("temp", null,this.filesDir)
-        val databaseReference = FirebaseDatabase.getInstance().getReference("Pets")
+        val databaseReference = FirebaseDatabase.getInstance().getReference("Pets").child(toString())
         val mTask = databaseReference.removeValue()
 
         mTask.addOnSuccessListener {
