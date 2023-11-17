@@ -3,17 +3,14 @@ package com.example.petadoptionfinals.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.provider.ContactsContract.DeletedContacts
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petadoptionfinals.R
-import com.example.petadoptionfinals.databinding.ItemStudentBinding
+import com.example.petadoptionfinals.databinding.ItemPetsBinding
 import com.example.petadoptionfinals.model.Pets
-import com.example.petadoptionfinals.mvvm.ContactInfoActivity
-import com.google.firebase.Firebase
+import com.example.petadoptionfinals.mvvm.PetInfoActivity
 import com.google.firebase.database.FirebaseDatabase
 import java.io.BufferedReader
 import java.io.BufferedWriter
@@ -21,11 +18,11 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-class StudentsAdapters(private val context : Context, var studentsList : ArrayList<Pets>) :
-    RecyclerView.Adapter<StudentsAdapters.ViewHolder>() {
+class PetAdapters(private val context : Context, var studentsList : ArrayList<Pets>) :
+    RecyclerView.Adapter<PetAdapters.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemStudentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemPetsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, context)
     }
 
@@ -48,7 +45,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
 
     class ViewHolder(
 
-        private val binding: ItemStudentBinding,
+        private val binding: ItemPetsBinding,
         private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -60,7 +57,7 @@ class StudentsAdapters(private val context : Context, var studentsList : ArrayLi
             binding.tvPhone.text = contacts.phone
 
             binding.llData.setOnClickListener {
-                val intent = Intent(context, ContactInfoActivity::class.java)
+                val intent = Intent(context, PetInfoActivity::class.java)
                 intent.putExtra("contact", contacts)
                 intent.putExtra("position", position)
 

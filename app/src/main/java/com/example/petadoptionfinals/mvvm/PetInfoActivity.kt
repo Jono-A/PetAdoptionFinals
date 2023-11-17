@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petadoptionfinals.R
-import com.example.petadoptionfinals.databinding.ActivityContactInfoBinding
+import com.example.petadoptionfinals.databinding.ActivityPetInfoBinding
 import com.example.petadoptionfinals.databinding.ToolbarTitleBinding
 import com.example.petadoptionfinals.model.Pets
 import com.example.petadoptionfinals.ui.EditInfoActivity
@@ -18,15 +18,15 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-class ContactInfoActivity : AppCompatActivity() {
+class PetInfoActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityContactInfoBinding
+    private lateinit var binding : ActivityPetInfoBinding
     private lateinit var toolbarBinding : ToolbarTitleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityContactInfoBinding.inflate(layoutInflater)
+        binding = ActivityPetInfoBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarTitleBinding.bind(binding.root)
 
         setContentView(binding.root)
@@ -37,7 +37,7 @@ class ContactInfoActivity : AppCompatActivity() {
 
         binding.btnEdit.setOnClickListener {
 
-            startActivity(Intent(this@ContactInfoActivity, EditInfoActivity::class.java))
+            startActivity(Intent(this@PetInfoActivity, EditInfoActivity::class.java))
         }
 
 
@@ -111,7 +111,7 @@ class ContactInfoActivity : AppCompatActivity() {
         mTask.addOnSuccessListener {
             Toast.makeText(this, "Data has been erased", Toast.LENGTH_LONG).show()
 
-            val intent = Intent(this, StudentViewModel::class.java)
+            val intent = Intent(this, PetViewModel::class.java)
             finish()
             startActivity(intent)
         }.addOnFailureListener{error ->

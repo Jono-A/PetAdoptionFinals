@@ -28,10 +28,10 @@
             android:name=".ui.EditInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddContactActivity"
+            android:name=".ui.AddPetActivity"
             android:exported="false" />
         <activity
-            android:name=".mvvm.ContactInfoActivity"
+            android:name=".mvvm.PetInfoActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

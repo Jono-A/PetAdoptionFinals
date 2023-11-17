@@ -1,7 +1,6 @@
 package com.example.petadoptionfinals.mvvm
 
 import android.content.Context
-import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,7 @@ import com.example.petadoptionfinals.model.Pets
 import java.io.File
 import java.util.Scanner
 
-class StudentViewModel :ViewModel() {
+class PetViewModel :ViewModel() {
 
     private val studentsList = MutableLiveData<ArrayList<Pets>>()
     val contactState : LiveData<ArrayList<Pets>> get() = studentsList

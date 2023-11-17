@@ -31,11 +31,11 @@ class MainActivity : AppCompatActivity() {
         readData(this)
 
         binding.rvList.layoutManager = LinearLayoutManager(this)
-        val contactsAdapters = StudentsAdapters(this, studentsList)
+        val contactsAdapters = PetAdapters(this, studentsList)
         binding.rvList.adapter = contactsAdapters
 
         binding.addButton.setOnClickListener{
-           val intent = Intent(this, AddContactActivity::class.java)
+           val intent = Intent(this, AddPetActivity::class.java)
             startActivity(intent)
         }
     }
