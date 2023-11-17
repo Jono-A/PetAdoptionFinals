@@ -1,6 +1,9 @@
 package com.example.petadoptionfinals.ui
 
+import android.app.ProgressDialog
 import android.content.Intent
+import android.media.Image
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract.DeletedContacts
 import android.widget.Toast
@@ -11,14 +14,20 @@ import com.example.petadoptionfinals.model.Pets
 import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import java.io.FileWriter
+import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddContactActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddContactBinding
     private lateinit var toolbarBinding : ToolbarTitleBinding
     private lateinit var database : DatabaseReference
+    private lateinit var ImageUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +44,35 @@ class AddContactActivity : AppCompatActivity() {
             }
 
         }
+
+        binding.addImage.setOnClickListener{
+
+            selectImage()
+        }
+
+
+
+    }
+
+
+
+
+    private fun selectImage() {
+
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 100)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK){
+            ImageUri = data?.data!!
+            binding.firebaseImage.setImageURI(ImageUri)
+        }
+
     }
 
 
@@ -58,6 +96,28 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     private fun addContact(): Boolean {
+        val progressDialog = ProgressDialog (this)
+        progressDialog.setMessage("Uploading Pet Image...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
+        val now = Date()
+        val fileName = formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
+
+        storageReference.putFile(ImageUri).
+                addOnSuccessListener {
+                    binding.firebaseImage.setImageURI(null)
+                    Toast.makeText(this@AddContactActivity, "Successfully uploaded", Toast.LENGTH_SHORT).show()
+                    if (progressDialog.isShowing) progressDialog.dismiss()
+                }.addOnFailureListener{
+
+                    if (progressDialog.isShowing)progressDialog.dismiss()
+            Toast.makeText(this@AddContactActivity,"Failed",Toast.LENGTH_SHORT).show()
+        }
+
+
         val name = binding.inName.text.toString()
         val email = binding.inEmail.text.toString()
         val phone = binding.inPhone.text.toString()
